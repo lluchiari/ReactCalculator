@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Text } from 'react-native';
 import InputButton from './InputButton';
 
 // Define the input buttons that will be displayed in the calculator.
@@ -11,13 +11,26 @@ const inputButtons = [
 ];
 
 class ReactCalculator extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      inputValue: 0
+    };
+  }
+
   render() {
     return(
       <View style={styles.rootContainer}>
-      <View style={styles.displayContainer}></View>
-      <View style={styles.inputContainer}>
-        {this._renderInputButtons()}
-      </View>
+        <View style={styles.displayContainer}>
+          <Text style={styles.displayText}>{this.state.inputValue}</Text>
+        </View>
+        <View>
+          <InputButton> Clr </InputButton>
+        </View>
+        <View style={styles.inputContainer}>
+          {this._renderInputButtons()}
+        </View>
       </View>
     );
 
@@ -61,12 +74,18 @@ const styles = StyleSheet.create({
   rootContainer: {
     flex: 1
   },
-
   displayContainer: {
     flex: 2,
-    backgroundColor: '#193441'
+    backgroundColor: '#193441',
+    justifyContent: 'center'
   },
-
+  displayText: {
+    color: 'white',
+    fontSize: 38,
+    fontWeight: 'bold',
+    textAlign: 'right',
+    padding: 20
+  },
   inputContainer: {
     flex: 8,
     backgroundColor: '#3E606F'
